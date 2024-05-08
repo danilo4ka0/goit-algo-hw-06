@@ -26,8 +26,15 @@ class Record:
         self.phones = [p for p in self.phones if p.value != phone]
 
     def edit_phone(self, old_phone, new_phone):
-        self.remove_phone(old_phone)
-        self.add_phone(new_phone)
+    # Знаходимо індекс старого телефону
+    for i, p in enumerate(self.phones):
+        if p.value == old_phone:
+            # Якщо знайдено, замінюємо старий телефон новим
+            self.phones[i] = Phone(new_phone)
+            return
+    # Якщо телефон не знайдено, виводимо повідомлення про помилку
+    print("Такий номер телефону не знайдено")
+
 
     def find_phone(self, phone):
         return phone if any(p.value == phone for p in self.phones) else None
